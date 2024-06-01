@@ -1,6 +1,6 @@
 # Go bindings for the CPython-3 C-API
 
-**Currently supports python-3.7 only.**
+**Currently, supports python-3.7 only.**
 
 This package provides a ``go`` package named "python" under which most of the
 ``PyXYZ`` functions and macros of the public C-API of CPython have been
@@ -45,7 +45,7 @@ Example:
 `func PyRun_AnyFile(filename string)` open `filename` and then call CPython API
 function `int PyRun_AnyFile(FILE *fp, const char *filename)`.
 
-Therefore its signature is `func PyRun_AnyFile(filename string) (int, error)`,
+Therefore, its signature is `func PyRun_AnyFile(filename string) (int, error)`,
 the `int` represent the error code from the CPython `PyRun_AnyFile` function
 and error will be set if we failed to open `filename`.
 

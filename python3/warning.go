@@ -20,6 +20,7 @@ import (
 All standard Python warning categories are available as global variables whose names are PyExc_ followed by the Python exception name.
 These have the type PyObject*; they are all class objects.
 */
+//goland:noinspection GoUnusedGlobalVariable
 var (
 	PyExc_Warning                   = togo(C.PyExc_Warning)
 	PyExc_BytesWarning              = togo(C.PyExc_BytesWarning)

@@ -15,6 +15,7 @@ import "C"
 import "unsafe"
 
 //ByteArray : https://docs.python.org/3/c-api/bytearray.html#c.PyByteArray_Type
+//goland:noinspection GoUnusedGlobalVariable
 var ByteArray = togo((*C.PyObject)(unsafe.Pointer(&C.PyByteArray_Type)))
 
 //PyByteArray_Check : https://docs.python.org/3/c-api/bytearray.html#c.PyByteArray_Check

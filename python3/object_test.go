@@ -120,8 +120,8 @@ func TestCallable(t *testing.T) {
 	builtins := PyEval_GetBuiltins()
 	assert.True(t, PyDict_Check(builtins))
 
-	len := PyDict_GetItemString(builtins, "len")
-	assert.True(t, PyCallable_Check(len))
+	test_len := PyDict_GetItemString(builtins, "len")
+	assert.True(t, PyCallable_Check(test_len))
 
 	emptyList := PyList_New(0)
 	assert.True(t, PyList_Check(emptyList))
@@ -132,17 +132,17 @@ func TestCallable(t *testing.T) {
 
 	PyTuple_SetItem(args, 0, emptyList)
 
-	length := len.Call(args, nil)
+	length := test_len.Call(args, nil)
 	assert.True(t, PyLong_Check(length))
 	assert.Equal(t, 0, PyLong_AsLong(length))
 	length.DecRef()
 
-	length = len.CallObject(args)
+	length = test_len.CallObject(args)
 	assert.True(t, PyLong_Check(length))
 	assert.Equal(t, 0, PyLong_AsLong(length))
 	length.DecRef()
 
-	length = len.CallFunctionObjArgs(emptyList)
+	length = test_len.CallFunctionObjArgs(emptyList)
 	assert.True(t, PyLong_Check(length))
 	assert.Equal(t, 0, PyLong_AsLong(length))
 	length.DecRef()

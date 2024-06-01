@@ -15,6 +15,7 @@ import "C"
 import "unsafe"
 
 //Tuple : https://docs.python.org/3/c-api/tuple.html#c.PyTuple_Type
+//goland:noinspection GoUnusedGlobalVariable
 var Tuple = togo((*C.PyObject)(unsafe.Pointer(&C.PyTuple_Type)))
 
 //PyTuple_Check : https://docs.python.org/3/c-api/tuple.html#c.PyTuple_Check

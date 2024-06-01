@@ -15,6 +15,7 @@ import "C"
 import "unsafe"
 
 //Bytes : https://docs.python.org/3/c-api/bytes.html#c.PyBytes_Type
+//goland:noinspection GoUnusedGlobalVariable
 var Bytes = togo((*C.PyObject)(unsafe.Pointer(&C.PyBytes_Type)))
 
 //PyBytes_Check : https://docs.python.org/3/c-api/bytes.html#c.PyBytes_Check
@@ -47,7 +48,7 @@ func PyBytes_Size(o *PyObject) int {
 
 //PyBytes_AsString : https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
 func PyBytes_AsString(o *PyObject) string {
-	return C.GoStringN(C.PyBytes_AsString(toc(o)), C.int(C.PyBytes_Size(toc(o)))) 
+	return C.GoStringN(C.PyBytes_AsString(toc(o)), C.int(C.PyBytes_Size(toc(o))))
 }
 
 //PyBytes_Concat : https://docs.python.org/3/c-api/bytes.html#c.PyBytes_Concat

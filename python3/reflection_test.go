@@ -12,8 +12,8 @@ func TestReflectionBuiltins(t *testing.T) {
 	builtins := PyEval_GetBuiltins()
 	assert.NotNil(t, builtins)
 
-	len := PyDict_GetItemString(builtins, "len")
-	assert.True(t, PyCallable_Check(len))
+	test_len := PyDict_GetItemString(builtins, "len")
+	assert.True(t, PyCallable_Check(test_len))
 }
 
 func TestReflectionLocals(t *testing.T) {
@@ -36,10 +36,10 @@ func TestReflectionFuncName(t *testing.T) {
 	builtins := PyEval_GetBuiltins()
 	assert.NotNil(t, builtins)
 
-	len := PyDict_GetItemString(builtins, "len")
-	assert.True(t, PyCallable_Check(len))
+	test_len := PyDict_GetItemString(builtins, "len")
+	assert.True(t, PyCallable_Check(test_len))
 
-	assert.Equal(t, "len", PyEval_GetFuncName(len))
+	assert.Equal(t, "len", PyEval_GetFuncName(test_len))
 }
 func TestReflectionFuncDesc(t *testing.T) {
 	Py_Initialize()
@@ -47,8 +47,8 @@ func TestReflectionFuncDesc(t *testing.T) {
 	builtins := PyEval_GetBuiltins()
 	assert.NotNil(t, builtins)
 
-	len := PyDict_GetItemString(builtins, "len")
-	assert.True(t, PyCallable_Check(len))
+	test_len := PyDict_GetItemString(builtins, "len")
+	assert.True(t, PyCallable_Check(test_len))
 
-	assert.Equal(t, "()", PyEval_GetFuncDesc(len))
+	assert.Equal(t, "()", PyEval_GetFuncDesc(test_len))
 }

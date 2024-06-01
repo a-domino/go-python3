@@ -12,12 +12,12 @@ import (
 	"fmt"
 	"os"
 
-	python "github.com/go-python/cpy3"
+	"github.com/a-domino/go-python3/python3"
 )
 
 var (
 	output     = flag.String("o", "variadic.c", "output file")
-	caseNumber = flag.Int("n", python.MaxVariadicLength, "number of case in the switch statement")
+	caseNumber = flag.Int("n", python3.MaxVariadicLength, "number of case in the switch statement")
 )
 
 func main() {
@@ -25,10 +25,15 @@ func main() {
 
 	out, err := os.Create(*output)
 	if err != nil {
-		fmt.Printf("Error opening file %s: %s", *output, err)
+		fmt.Printf("Error opening file %s: %s\n", *output, err)
 		os.Exit(1)
 	}
-	defer out.Close()
+	defer func(out *os.File) {
+		err := out.Close()
+		if err != nil {
+			fmt.Printf("%#v\n", err)
+		}
+	}(out)
 	_, err = out.WriteString(`/*
 Unless explicitly stated otherwise all files in this repository are licensed
 under the MIT License.
@@ -38,14 +43,21 @@ Copyright 2018 Datadog, Inc.
 
 `)
 	if err != nil {
-		fmt.Printf("Error writing to file %s: %s", *output, err)
+		fmt.Printf("Error writing to file %s: %s\n", *output, err)
 		os.Exit(1)
 	}
 
-	out.WriteString("#include \"Python.h\"\n\n")
-	out.WriteString(renderTemplate(*caseNumber, "PyObject_CallFunctionObjArgs", "callable"))
-	out.WriteString(renderTemplate(*caseNumber, "PyObject_CallMethodObjArgs", "obj", "name"))
-
+	stringsToWrite := []string{
+		"#include \"Python.h\"\n\n",
+		renderTemplate(*caseNumber, "PyObject_CallFunctionObjArgs", "callable"),
+		renderTemplate(*caseNumber, "PyObject_CallMethodObjArgs", "obj", "name"),
+	}
+	for _, i := range stringsToWrite {
+		if _, err = out.WriteString(i); err != nil {
+			fmt.Printf("Error while writing string: %#v\n", err)
+			os.Exit(1)
+		}
+	}
 }
 
 func renderTemplate(n int, functionName string, pyArgs ...string) string {

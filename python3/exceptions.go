@@ -20,6 +20,7 @@ import (
 All standard Python exceptions are available as global variables whose names are PyExc_ followed by the Python exception name.
 These have the type PyObject*; they are all class objects.
 */
+//goland:noinspection GoUnusedGlobalVariable
 var (
 	PyExc_BaseException          = togo(C.PyExc_BaseException)
 	PyExc_Exception              = togo(C.PyExc_Exception)
@@ -96,11 +97,13 @@ func PyErr_NewExceptionWithDoc(name, doc string, base, dict *PyObject) *PyObject
 }
 
 //PyException_GetTraceback : https://docs.python.org/3/c-api/exceptions.html#c.PyException_GetTraceback
+//goland:noinspection GoUnusedExportedFunction
 func PyException_GetTraceback(ex *PyObject) *PyObject {
 	return togo(C.PyException_GetTraceback(toc(ex)))
 }
 
 //PyException_SetTraceback : https://docs.python.org/3/c-api/exceptions.html#c.PyException_SetTraceback
+//goland:noinspection GoUnusedExportedFunction
 func PyException_SetTraceback(ex, tb *PyObject) int {
 	return int(C.PyException_SetTraceback(toc(ex), toc(tb)))
 }
@@ -116,11 +119,13 @@ func PyException_SetContext(ex, ctx *PyObject) {
 }
 
 //PyException_GetCause : https://docs.python.org/3/c-api/exceptions.html#c.PyException_GetCause
+//goland:noinspection GoUnusedExportedFunction
 func PyException_GetCause(ex *PyObject) *PyObject {
 	return togo(C.PyException_GetCause(toc(ex)))
 }
 
 //PyException_SetCause : https://docs.python.org/3/c-api/exceptions.html#c.PyException_SetCause
+//goland:noinspection GoUnusedExportedFunction
 func PyException_SetCause(ex, cause *PyObject) {
 	C.PyException_SetCause(toc(ex), toc(cause))
 }

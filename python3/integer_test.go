@@ -61,7 +61,7 @@ func TestPyLongFromAsUnsignedLongLong(t *testing.T) {
 
 func TestPyLongFromAsDouble(t *testing.T) {
 	Py_Initialize()
-	v := float64(2354.0)
+	v := 2354.0
 	pyLong := PyLong_FromDouble(v)
 	assert.NotNil(t, pyLong)
 	assert.Equal(t, v, PyLong_AsDouble(pyLong))
@@ -70,7 +70,7 @@ func TestPyLongFromAsDouble(t *testing.T) {
 
 func TestPyLongFromAsGoFloat64(t *testing.T) {
 	Py_Initialize()
-	v := float64(2354.0)
+	v := 2354.0
 	pyLong := PyLong_FromGoFloat64(v)
 	assert.NotNil(t, pyLong)
 	assert.Equal(t, v, PyLong_AsDouble(pyLong))

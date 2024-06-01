@@ -98,6 +98,7 @@ func PyLong_AsLong(obj *PyObject) int {
 }
 
 //PyLong_AsLongAndOverflow : https://docs.python.org/3/c-api/long.html#c.PyLong_AsLongAndOverflow
+//goland:noinspection GoUnusedExportedFunction
 func PyLong_AsLongAndOverflow(obj *PyObject) (int, int) {
 	overflow := C.int(0)
 	ret := C.PyLong_AsLongAndOverflow(toc(obj), &overflow)
@@ -110,6 +111,7 @@ func PyLong_AsLongLong(obj *PyObject) int64 {
 }
 
 //PyLong_AsLongLongAndOverflow : https://docs.python.org/3/c-api/long.html#c.PyLong_AsLongLongAndOverflow
+//goland:noinspection GoUnusedExportedFunction
 func PyLong_AsLongLongAndOverflow(obj *PyObject) (int64, int) {
 	overflow := C.int(0)
 	ret := C.PyLong_AsLongLongAndOverflow(toc(obj), &overflow)
@@ -127,11 +129,13 @@ func PyLong_AsUnsignedLongLong(obj *PyObject) uint64 {
 }
 
 //PyLong_AsUnsignedLongMask : https://docs.python.org/3/c-api/long.html#c.PyLong_AsUnsignedLongMask
+//goland:noinspection GoUnusedExportedFunction
 func PyLong_AsUnsignedLongMask(obj *PyObject) uint {
 	return uint(C.PyLong_AsUnsignedLongMask(toc(obj)))
 }
 
 //PyLong_AsUnsignedLongLongMask : https://docs.python.org/3/c-api/long.html#c.PyLong_AsUnsignedLongLongMask
+//goland:noinspection GoUnusedExportedFunction
 func PyLong_AsUnsignedLongLongMask(obj *PyObject) uint64 {
 	return uint64(C.PyLong_AsUnsignedLongLongMask(toc(obj)))
 }

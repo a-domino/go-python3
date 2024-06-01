@@ -9,9 +9,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/a-domino/go-python3/python3"
 	"os"
-
-	python3 "github.com/go-python/cpy3"
 )
 
 func main() {
@@ -34,7 +33,7 @@ func printList() error {
 	list := python3.PyList_New(5)
 
 	if exc := python3.PyErr_Occurred(); list == nil && exc != nil {
-		return fmt.Errorf("Fail to create python list object")
+		return fmt.Errorf("fail to create python list object")
 	}
 	defer list.DecRef()
 

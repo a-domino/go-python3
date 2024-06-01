@@ -15,6 +15,7 @@ import "C"
 import "unsafe"
 
 //Complex : https://docs.python.org/3/c-api/complex.html#c.PyComplex_Type
+//goland:noinspection GoUnusedGlobalVariable
 var Complex = togo((*C.PyObject)(unsafe.Pointer(&C.PyComplex_Type)))
 
 //PyComplex_Check : https://docs.python.org/3/c-api/complex.html#c.PyComplex_Check

@@ -9,9 +9,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/a-domino/go-python3/python3"
 	"os"
-
-	python3 "github.com/go-python/cpy3"
 )
 
 func main() {

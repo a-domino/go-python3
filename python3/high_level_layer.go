@@ -8,7 +8,9 @@ Copyright 2018 Datadog, Inc.
 package python3
 
 /*
-#cgo pkg-config: python3
+#cgo pkg-config: python-3.7
+#cgo LDFLAGS: -L/usr/local/lib/python3.7/config-3.7m-x86_64-linux-gnu -L/usr/local/lib -lpython3.7m -lcrypt -ldl  -lm
+
 #include "Python.h"
 */
 import "C"
@@ -19,6 +21,7 @@ import (
 
 //Py_Main : https://docs.python.org/3/c-api/veryhigh.html?highlight=pycompilerflags#c.Py_Main
 // "error" will be set if we fail to call "Py_DecodeLocale" on every "args".
+//goland:noinspection GoDeferInLoop
 func Py_Main(args []string) (int, error) {
 	argc := C.int(len(args))
 	argv := make([]*C.wchar_t, argc, argc)
@@ -49,7 +52,7 @@ func PyRun_AnyFile(filename string) (int, error) {
 
 	cfile, err := C.fopen(cfilename, mode)
 	if err != nil {
-		return -1, fmt.Errorf("fail to open '%s': %s", filename, err)
+		return -1, fmt.Errorf("fail to open '%s': %v", filename, err)
 	}
 	defer C.fclose(cfile)
 

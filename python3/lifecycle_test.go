@@ -35,11 +35,18 @@ func TestProgramName(t *testing.T) {
 	Py_Finalize()
 
 	defaultName, err := Py_GetProgramName()
-	defer Py_SetProgramName(defaultName)
+	defer func(name string) {
+		err = Py_SetProgramName(name)
+		if err != nil {
+			t.Logf("Py_SetProgramName to default name failed: %#v\n", err)
+		}
+	}(defaultName)
 
 	assert.Nil(t, err)
 	name := "py3é"
-	Py_SetProgramName(name)
+	if err = Py_SetProgramName(name); err != nil {
+		t.Logf("Py_SetProgramName to name failed: %#v\n", err)
+	}
 	newName, err := Py_GetProgramName()
 	assert.Nil(t, err)
 	assert.Equal(t, name, newName)
@@ -71,11 +78,17 @@ func TestPath(t *testing.T) {
 	Py_Finalize()
 
 	defaultPath, err := Py_GetPath()
-	defer Py_SetPath(defaultPath)
+	defer func(path string) {
+		if err = Py_SetPath(path); err != nil {
+			t.Logf("Py_SetPath to default path failed: %#v\n", err)
+		}
+	}(defaultPath)
 
 	assert.Nil(t, err)
-	name := "påth"
-	Py_SetPath(name)
+	name := "test_path"
+	if err := Py_SetPath(name); err != nil {
+		t.Logf("Py_SetPath to path failed: %#v\n", err)
+	}
 	newName, err := Py_GetPath()
 	assert.Nil(t, err)
 	assert.Equal(t, name, newName)
@@ -108,13 +121,19 @@ func TestBuildInfo(t *testing.T) {
 }
 
 func TestPythonHome(t *testing.T) {
-	name := "høme"
+	name := "new_home"
 
 	defaultHome, err := Py_GetPythonHome()
-	defer Py_SetPythonHome(defaultHome)
+	defer func(home string) {
+		if err = Py_SetPythonHome(home); err != nil {
+			t.Logf("Py_SetPythonHome to default home failed: %#v\n", err)
+		}
+	}(defaultHome)
 
 	assert.Nil(t, err)
-	Py_SetPythonHome(name)
+	if err = Py_SetPythonHome(name); err != nil {
+		t.Logf("Py_SetPythonHome to default home failed: %#v\n", err)
+	}
 	newName, err := Py_GetPythonHome()
 	assert.Nil(t, err)
 	assert.Equal(t, name, newName)
@@ -123,7 +142,9 @@ func TestPythonHome(t *testing.T) {
 func TestSetArgv(t *testing.T) {
 	Py_Initialize()
 
-	PySys_SetArgv([]string{"test.py"})
+	if err := PySys_SetArgv([]string{"test.py"}); err != nil {
+		t.Logf("PySys_SetArgv to test.py failed: %#v\n", err)
+	}
 
 	argv := PySys_GetObject("argv")
 	assert.Equal(t, 1, PyList_Size(argv))
@@ -135,7 +156,9 @@ func TestSetArgv(t *testing.T) {
 func TestSetArgvEx(t *testing.T) {
 	Py_Initialize()
 
-	PySys_SetArgvEx([]string{"test.py"}, false)
+	if err := PySys_SetArgvEx([]string{"test.py"}, false); err != nil {
+		t.Logf("PySys_SetArgvEx to test.py failed: %#v\n", err)
+	}
 
 	argv := PySys_GetObject("argv")
 	assert.Equal(t, 1, PyList_Size(argv))

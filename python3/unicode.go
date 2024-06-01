@@ -17,6 +17,7 @@ import (
 )
 
 //Unicode : https://docs.python.org/3/c-api/unicode.html#c.PyUnicode_Type
+//goland:noinspection GoUnusedGlobalVariable
 var Unicode = togo((*C.PyObject)(unsafe.Pointer(&C.PyUnicode_Type)))
 
 //PyUnicode_Check : https://docs.python.org/3/c-api/unicode.html#c.PyUnicode_Check

@@ -30,6 +30,7 @@ func Py_Initialize() {
 }
 
 //Py_InitializeEx : https://docs.python.org/3/c-api/init.html#c.Py_InitializeEx
+//goland:noinspection GoUnusedExportedFunction
 func Py_InitializeEx(initsigs bool) {
 	if initsigs {
 		C.Py_InitializeEx(1)
@@ -54,6 +55,7 @@ func Py_Finalize() {
 }
 
 //Py_SetStandardStreamEncoding : https://docs.python.org/3/c-api/init.html#c.Py_SetStandardStreamEncoding
+//goland:noinspection GoUnusedExportedFunction
 func Py_SetStandardStreamEncoding(encoding, errors string) int {
 	cencoding := C.CString(encoding)
 	defer C.free(unsafe.Pointer(cencoding))
@@ -206,6 +208,7 @@ func Py_GetBuildInfo() string {
 }
 
 //PySys_SetArgvEx : https://docs.python.org/3/c-api/init.html#c.PySys_SetArgvEx
+//goland:noinspection GoDeferInLoop
 func PySys_SetArgvEx(args []string, updatepath bool) error {
 	argc := C.int(len(args))
 	argv := make([]*C.wchar_t, argc, argc)
@@ -233,6 +236,7 @@ func PySys_SetArgvEx(args []string, updatepath bool) error {
 }
 
 //PySys_SetArgv : https://docs.python.org/3/c-api/init.html#c.PySys_SetArgv
+//goland:noinspection GoDeferInLoop
 func PySys_SetArgv(args []string) error {
 	argc := C.int(len(args))
 	argv := make([]*C.wchar_t, argc, argc)

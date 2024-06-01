@@ -133,12 +133,14 @@ func PyImport_GetImporter(path *PyObject) *PyObject {
 }
 
 //PyImport_ImportFrozenModuleObject : https://docs.python.org/3/c-api/import.html#c.PyImport_ImportFrozenModuleObject
+//goland:noinspection GoUnusedExportedFunction
 func PyImport_ImportFrozenModuleObject(name *PyObject) int {
 	return int(C.PyImport_ImportFrozenModuleObject(toc(name)))
 
 }
 
 //PyImport_ImportFrozenModule : https://docs.python.org/3/c-api/import.html#c.PyImport_ImportFrozenModule
+//goland:noinspection GoUnusedExportedFunction
 func PyImport_ImportFrozenModule(name string) int {
 	cname := C.CString(name)
 	defer C.free(unsafe.Pointer(cname))

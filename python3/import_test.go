@@ -84,8 +84,8 @@ func TestAddModuleObject(t *testing.T) {
 	pyName := PyUnicode_FromString("os.new")
 	defer pyName.DecRef()
 
-	new := PyImport_AddModuleObject(pyName)
-	assert.NotNil(t, new)
+	test_new := PyImport_AddModuleObject(pyName)
+	assert.NotNil(t, test_new)
 }
 
 func TestAddModule(t *testing.T) {
@@ -95,8 +95,8 @@ func TestAddModule(t *testing.T) {
 	assert.NotNil(t, os)
 	defer os.DecRef()
 
-	new := PyImport_AddModule("os.new")
-	assert.NotNil(t, new)
+	test_new := PyImport_AddModule("os.new")
+	assert.NotNil(t, test_new)
 }
 
 func TestExecCodeModule(t *testing.T) {
@@ -244,8 +244,8 @@ func TestGetModule(t *testing.T) {
 	name := PyUnicode_FromString("os")
 	defer name.DecRef()
 
-	new := PyImport_GetModule(name)
-	assert.Equal(t, new, os)
+	test_new := PyImport_GetModule(name)
+	assert.Equal(t, test_new, os)
 }
 
 func TestGetImporter(t *testing.T) {

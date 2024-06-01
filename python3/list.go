@@ -15,6 +15,7 @@ import "C"
 import "unsafe"
 
 //List : https://docs.python.org/3/c-api/list.html#c.PyList_Type
+//goland:noinspection GoUnusedGlobalVariable
 var List = togo((*C.PyObject)(unsafe.Pointer(&C.PyList_Type)))
 
 //PyList_Check : https://docs.python.org/3/c-api/list.html#c.PyList_Check

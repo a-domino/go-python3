@@ -15,6 +15,7 @@ import "C"
 import "unsafe"
 
 //Module : https://docs.python.org/3/c-api/module.html#c.PyModule_Type
+//goland:noinspection GoUnusedGlobalVariable
 var Module = togo((*C.PyObject)(unsafe.Pointer(&C.PyModule_Type)))
 
 //PyModule_Check : https://docs.python.org/3/c-api/module.html#c.PyModule_Check

@@ -23,6 +23,7 @@ import (
 const MaxVariadicLength = 20
 
 // Constants used for comparison in PyObject_RichCompareBool
+//goland:noinspection GoUnusedGlobalVariable
 var (
 	Py_LT = int(C.Py_LT)
 	Py_LE = int(C.Py_LE)
@@ -32,7 +33,7 @@ var (
 	Py_GE = int(C.Py_GE)
 )
 
-//None : https://docs.python.org/3/c-api/none.html#c.Py_None
+//Py_None : https://docs.python.org/3/c-api/none.html#c.Py_None
 var Py_None = togo(C.Py_None)
 
 //PyObject : https://docs.python.org/3/c-api/structures.html?highlight=pyobject#c.PyObject
